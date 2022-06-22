@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1653871134 source:d:\dev\stateexamtasks\stateexam21032009\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+

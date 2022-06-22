@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1655573904 source:d:\dev\stateexamtasks\stateexam20141507_02\main.cpp
+	<iostream>
+	<cassert>
+	<vector>
+	<unordered_set>
+	<algorithm>
+

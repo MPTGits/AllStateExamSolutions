@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1655344279 source:d:\dev\stateexamtasks\stateexam_20100908\main.cpp
+	<iostream>
+	<string.h>
+
