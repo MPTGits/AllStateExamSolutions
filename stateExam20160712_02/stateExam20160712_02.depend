@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1655905134 source:d:\allstateexamsolutions\stateexam20160712_02\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<queue>
+	<stack>
+	<algorithm>
+
