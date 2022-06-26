@@ -106,8 +106,10 @@ public:
 
 
     void swap(T currData, T nextData){
-        curr->data = nextData;
-        curr->next->data = currData;
+        if(hasNextIterValue()){
+            curr->data = nextData;
+            curr->next->data = currData;
+        }
     }
 
     bool isSorted(){
