@@ -109,83 +109,43 @@ public:
 
 };
 
-LList<int>  mergeLists(LList<LList<int>> & l) {
-    l.iterStart();
-    Node<LList<int>> * tmp = l.iter();
-    LList<int> resultList;
-    while(tmp){
-        if(tmp->data.isSorted()){
-            tmp->data.iterStart();
-            Node<int> * iter = tmp->data.iter();
-            while(iter){
-                resultList.insertToEnd(iter->data);
-                iter = tmp->data.iter();
-            }
-        }
-        tmp = l.iter();
-    }
+void sortList(LList<int> & l){
+    Node<int> * tmp;
 
-    for(int i=0; i<resultList.lenght(); ++i){
-        resultList.iterStart();
-        Node<int> * tmp = resultList.iter();
+    for(int i = 0; i<l.lenght(); ++i){
+        l.iterStart();
+        tmp = l.iter();
         while(tmp->next){
             if(tmp->data > tmp->next->data){
                 int tmpVal = tmp->data;
                 tmp->data = tmp->next->data;
                 tmp->next->data = tmpVal;
             }
-            tmp = resultList.iter();
+            tmp = l.iter();
         }
     }
 
-    return resultList;
 }
-
 
 
 int main()
 {
-    LList<int> l1;
-    l1.insertToEnd(2);
-    l1.insertToEnd(4);
-    l1.insertToEnd(8);
-    l1.insertToEnd(11);
+    LList<int> l;
 
-    LList<int> l2;
-    l2.insertToEnd(4);
-    l2.insertToEnd(6);
-    l2.insertToEnd(2);
-    l2.insertToEnd(3);
+    l.insertToEnd(5);
+    l.insertToEnd(4);
+    l.insertToEnd(3);
+    l.insertToEnd(2);
+    l.insertToEnd(1);
 
-    LList<int> l3;
-    l3.insertToEnd(1);
-    l3.insertToEnd(3);
-    l3.insertToEnd(65);
+    sortList(l);
 
-    LList<int> l4;
-    l4.insertToEnd(11);
-    l4.insertToEnd(12);
-
-    LList<int> l5;
-    l5.insertToEnd(9);
-    l5.insertToEnd(8);
-    l5.insertToEnd(7);
-
-    LList<LList<int>> ll;
-    ll.insertToEnd(l1);
-    ll.insertToEnd(l2);
-    ll.insertToEnd(l3);
-    ll.insertToEnd(l4);
-    ll.insertToEnd(l5);
-
-    LList<int> res = mergeLists(ll);
-    res.iterStart();
-    Node<int> * tmp = res.iter();
+    l.iterStart();
+    Node<int> * tmp = l.iter();
     while(tmp){
         cout<<tmp->data<<endl;
-        tmp = res.iter();
+        tmp = tmp->next;
     }
-
 
     return 0;
 }
