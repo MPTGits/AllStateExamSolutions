@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 
 using namespace std;
@@ -167,3 +168,171 @@ int main()
 
     return 0;
 }
+*/
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+class LList;
+
+template <typename T>
+struct Node{
+    friend LList<T>;
+    T data;
+    Node() {
+        next = nullptr;
+    }
+    Node<T> * getAdjecentNode(){
+        if(this->next){
+            return this->next;
+        }
+        return nullptr;
+    }
+    private:
+        Node<T> * next;
+};
+
+template <typename T>
+class LList {
+private:
+    Node<T> * start;
+    Node<T> * curr;
+    Node<T> * end;
+    void deleteList(){
+        Node<T> * tmp;
+        while(start){
+            tmp = start;
+            start = start->next;
+            delete tmp;
+        }
+        end = nullptr;
+    }
+
+    void copyList(const LList & o){
+        start = end = nullptr;
+        if(o.start){
+            Node<T> *tmp = o.start;
+            while(tmp){
+                insertToEnd(tmp->data);
+                tmp = tmp->next;
+            }
+        }
+
+    }
+
+
+public:
+    LList(){
+        start = end = nullptr;
+    }
+
+    LList(T data){
+        start = end = new Node<T>;
+        start->data = data;
+    }
+
+    LList(const LList<T> & o){
+        copyList(o);
+    }
+
+
+    LList<T>& operator=(const LList<T> & o){
+        if(this!=&o){
+            deleteList();
+            copyList(o);
+        }
+        return *this;
+    }
+
+    void insertToEnd(T data){
+        if(!start){
+            start = end = new Node<T>;
+            start->data = data;
+        } else {
+            Node<T> *tmp = new Node<T>;
+            tmp->data = data;
+            tmp->next = nullptr;
+            end->next = tmp;
+            end = end->next;
+        }
+
+    }
+
+    void iterStart() {
+        curr = start;
+    }
+
+    Node<T> * iter(){
+        Node<T> * res = curr;
+        if(curr) curr = curr->next;
+        return res;
+    }
+
+    void print(){
+        Node<T> * tmp = start;
+        while(tmp){
+            cout<<tmp->data<<" ";
+            tmp=tmp->next;
+        }
+    }
+
+
+    bool isSorted(){
+        Node<T> * tmp = start;
+        while(tmp->next){
+            if(tmp->data > tmp->next->data) return false;
+            tmp = tmp->next;
+        }
+        return true;
+    }
+
+    int lenght(){
+        Node<int> * tmp = start;
+        int len = 0;
+        while(tmp){
+            len++;
+            tmp = tmp->next;
+        }
+        return len;
+    }
+
+};
+
+void sortList(LList<int> & l){
+    Node<int> * iter;
+
+    for(int i = 0; i<l.lenght(); ++i){
+        l.iterStart();
+        iter = l.iter();
+        while(iter->getAdjecentNode()){
+            Node<int> * nextIter = iter->getAdjecentNode();
+            if(iter->data > nextIter->data){
+                int tmpVal = iter->data;
+                iter->data = nextIter->data;
+                nextIter->data = tmpVal;
+            }
+            iter = l.iter();
+        }
+    }
+
+}
+
+
+int main()
+{
+    LList<int> l;
+
+    l.insertToEnd(5);
+    l.insertToEnd(4);
+    l.insertToEnd(3);
+    l.insertToEnd(2);
+    l.insertToEnd(1);
+
+    sortList(l);
+
+   l.print();
+
+    return 0;
+}
+
