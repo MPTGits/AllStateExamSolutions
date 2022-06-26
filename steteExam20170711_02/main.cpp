@@ -82,10 +82,32 @@ public:
         curr = start;
     }
 
-    Node<T> * iter(){
+    T iter(){
         Node<T> * res = curr;
         if(curr) curr = curr->next;
-        return res;
+        return res->data;
+    }
+
+    void print(){
+        Node<T> * tmp = start;
+        while(tmp){
+            cout<<tmp->data<<" ";
+            tmp=tmp->next;
+        }
+    }
+
+    bool hasNextIterValue(){
+        return curr->next;
+    }
+
+    T peekNextIterValue(){
+        return curr->next->data;
+    }
+
+
+    void swap(T currData, T nextData){
+        curr->data = nextData;
+        curr->next->data = currData;
     }
 
     bool isSorted(){
@@ -110,18 +132,17 @@ public:
 };
 
 void sortList(LList<int> & l){
-    Node<int> * tmp;
+    int iterVal;
 
     for(int i = 0; i<l.lenght(); ++i){
         l.iterStart();
-        tmp = l.iter();
-        while(tmp->next){
-            if(tmp->data > tmp->next->data){
-                int tmpVal = tmp->data;
-                tmp->data = tmp->next->data;
-                tmp->next->data = tmpVal;
+        iterVal = l.iter();
+        while(l.hasNextIterValue()){
+            int nextIter = l.peekNextIterValue();
+            if(iterVal > nextIter){
+                swap(iterVal, nextIter);
             }
-            tmp = l.iter();
+            iterVal = l.iter();
         }
     }
 
@@ -140,12 +161,7 @@ int main()
 
     sortList(l);
 
-    l.iterStart();
-    Node<int> * tmp = l.iter();
-    while(tmp){
-        cout<<tmp->data<<endl;
-        tmp = tmp->next;
-    }
+   l.print();
 
     return 0;
 }
