@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
-#include <string.h>
 
 using namespace std;
 
@@ -96,14 +95,8 @@ bool member(Node * n, int x){
 
 int main()
 {
-
-
-    fstream f;
-    f.open("test.txt", ios::in);
-    char a[100], b[100] ,c[100];
-    while(f>>a>>b>>c) cout<<a<<" "<<b<<" "<<c<<endl;
-    for(int i =0; i<strlen(c); ++i)
-        cout<<c[i];
+    int x = sqrt(8);
+    cout<<x;
 
     return 0;
 }
