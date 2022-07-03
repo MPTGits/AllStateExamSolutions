@@ -70,7 +70,12 @@ void serializeHelper(Tree * t, fstream& f){
 void serialize(Tree * t, const char * fileName){
     fstream f;
     f.open(fileName, ios::out);
+    if(!f.is_open()){
+        cerr<<"Could not open file";
+        return;
+    }
     serializeHelper(t, f);
+    f.close();
 }
 
 
@@ -104,6 +109,7 @@ int main()
     readLast(&t0);
     cout<<endl;
     serialize(&t0, "testFile.txt");
+
 
     return 0;
 }
