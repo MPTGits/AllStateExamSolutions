@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1656964237 source:d:\allstateexamsolutions\test\main.cpp
+	<iostream>
+	<fstream>
+

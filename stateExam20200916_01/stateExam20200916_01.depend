@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1656955149 source:d:\allstateexamsolutions\stateexam20200916_01\main.cpp
+	<iostream>
+	<string.h>
+	<queue>
+
